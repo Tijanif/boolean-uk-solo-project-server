@@ -21,6 +21,7 @@ model User {
   name String
   email String
   password String
+  avatar String?
   income Income[]
   household HouseHold[]
 }
