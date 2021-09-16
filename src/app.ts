@@ -6,7 +6,7 @@ const morgan = require('morgan');
 import { JwtPayload } from 'jsonwebtoken';
 import authRouter from './Auth/routes';
 
-// import loginAuth from './middleware/loginAuth';
+import loginAuth from './middleware/loginAuth';
 
 declare global {
   namespace Express {
@@ -33,7 +33,7 @@ app.use(morgan('dev'));
 /* SETUP ROUTES */
 app.use(authRouter);
 
-// app.use(loginAuth);
+app.use(loginAuth);
 
 app.use('/user', userRouter);
 
