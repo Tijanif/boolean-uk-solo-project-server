@@ -30,3 +30,19 @@ export const getAllUsers = async (req: Request, res: Response) => {
     res.json({ error: 'The is an issue' });
   }
 };
+
+// Get User by Id
+export const getAUserById = async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+
+  try {
+    const userById = await prisma.user.findUnique({
+      where: { id },
+    });
+    res.json({ date: userById });
+  } catch (error) {
+    console.log(error);
+
+    res.json({ error: `Could not find the user with ${id}` });
+  }
+};
