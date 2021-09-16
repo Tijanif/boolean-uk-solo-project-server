@@ -6,8 +6,8 @@ import { compare } from 'bcrypt';
 
 export const foundUserWithValidation = async (userData: User) => {
   // look for user in db
-  const foundUser = await prisma.user.findUnique({
-    where: { name: userData.name },
+  const foundUser = await prisma.user.findFirst({
+    where: { email: userData.email },
   });
 
   // Throw error is not found

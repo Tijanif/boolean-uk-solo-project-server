@@ -4,8 +4,11 @@ import { validateToken } from '../utills/authGenerator';
 
 export default (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.token;
+  console.log('Token', token);
 
   const userData = token && validateToken(token);
+  console.log('User Data', userData);
+
   if (userData) {
     req.currentUser = userData;
     next();

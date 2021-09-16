@@ -16,18 +16,18 @@ export const loginUser = async (req: Request, res: Response) => {
     // create a token
     const token = createToken({
       id: loggedUser.id,
-      usename: loggedUser.username,
+      name: loggedUser.name,
     });
     res.cookie('token', token, { httpOnly: true });
     // result
     res.json({
       user: {
-        msg: `Hello ${loggedUser.username}! You are now logged in`,
-        username: loggedUser.username,
+        msg: `Hello ${loggedUser.name}! You are now logged in`,
+        name: loggedUser.name,
       },
     });
   } catch (error) {
-    console.log(error);
+    console.error({ error });
 
     res.status(401).json({ error: error });
   }

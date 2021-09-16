@@ -10,5 +10,6 @@ export const createToken = (payload: jwt.JwtPayload) => {
 };
 
 export const validateToken = (token: string) => {
+  console.log('JWT Secret', JWT_SECRET);
   return jwt.verify(token, JWT_SECRET);
 };
