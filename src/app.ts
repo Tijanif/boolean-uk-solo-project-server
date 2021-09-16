@@ -3,6 +3,7 @@ import express, { NextFunction } from 'express';
 const cookieParser = require('cookie-parser');
 import cors from 'cors';
 const morgan = require('morgan');
+import userRouter from '../src/resources/user/routes';
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 /* SETUP ROUTES */
+
+app.use('/user', userRouter);
 
 app.get('*', (req, res) => {
   res.json({ ok: true });
