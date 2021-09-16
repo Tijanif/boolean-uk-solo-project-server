@@ -3,6 +3,19 @@ import express, { NextFunction } from 'express';
 const cookieParser = require('cookie-parser');
 import cors from 'cors';
 const morgan = require('morgan');
+import { JwtPayload } from 'jsonwebtoken';
+import authRouter from './Auth/routes';
+
+// import loginAuth from './middleware/loginAuth';
+
+declare global {
+  namespace Express {
+    interface Request {
+      currentUser: string | JwtPayload;
+    }
+  }
+}
+
 import userRouter from '../src/resources/user/routes';
 
 const app = express();
@@ -18,6 +31,9 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 /* SETUP ROUTES */
+app.use(authRouter);
+
+// app.use(loginAuth);
 
 app.use('/user', userRouter);
 
