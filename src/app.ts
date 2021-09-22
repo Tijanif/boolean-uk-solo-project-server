@@ -17,7 +17,10 @@ declare global {
 }
 
 import userRouter from '../src/resources/user/routes';
-
+import personRouter from '../src/resources/Person/routes';
+import divisionRouter from '../src/resources/Division/routes';
+import expenseRouter from '../src/resources/Expenses/routes';
+import incomeRouter from '../src/resources/Income/routes';
 const app = express();
 
 /* SETUP MIDDLEWARE */
@@ -36,6 +39,10 @@ app.use(authRouter);
 app.use(loginAuth);
 
 app.use('/user', userRouter);
+app.use('/person', personRouter);
+app.use('/division', divisionRouter);
+app.use('/expense', expenseRouter);
+app.use('/income', incomeRouter);
 
 app.get('*', (req, res) => {
   res.json({ ok: true });
