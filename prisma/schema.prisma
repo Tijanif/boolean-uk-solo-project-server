@@ -22,39 +22,35 @@ model User {
   email String
   password String
   avatar String?
-  income Income[]
-  household HouseHold[]
+
+  
+}
+
+// Self and partner
+model Person {
+  id Int @id @default(autoincrement())
+  name String
+  income Income?
+  expenses Expenses[]
 }
 
 model Income {
   id Int @id @default(autoincrement())
-  userId Int
-  user User @relation(fields: [userId], references:[id], onDelete: Cascade, onUpdate: Cascade) 
-  household HouseHold[]
+ amount Int
+ person Person @relation(fields: [personId], references:[id])
+ personId Int
 }
+
 
 model Expenses {
   id Int @id @default(autoincrement())
-  userId Int
   name String
   amount Float
-  household HouseHold[]
-  
+  person Person @relation(fields: [personId], references:[id])
+  personId Int
 }
 
-enum TypesofDivision {
-  BASDONINCOME
-  FYFTYFYFTY
-  GRABABAG
-}
-model HouseHold {
+model Division {
   id Int @id @default(autoincrement())
-  users User[] @relation(fields: [userId], references:[id], onDelete: Cascade, onUpdate: Cascade) 
-  userId Int
-  incomes Income[] @relation(fields: [incomeId], references:[id], onDelete: Cascade, onUpdate: Cascade) 
-  incomeId Int
-  expenses Expenses[] @relation(fields: [expensesId], references:[id], onDelete: Cascade, onUpdate: Cascade) 
-  expensesId Int
-  divisionType TypesofDivision 
-
+  name String
 }
