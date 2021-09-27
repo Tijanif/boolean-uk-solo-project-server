@@ -13,7 +13,7 @@ export const createAnExpense = async (req: Request, res: Response) => {
     res.json(CreatedExpense);
   } catch (error) {
     console.log(error);
-    res.json({ Error: 'Fail to create a user' });
+    res.json({ Error: 'Fail to create an expense' });
   }
 };
 
@@ -35,6 +35,26 @@ export const getExpenseById = async (req: Request, res: Response) => {
   try {
     const expenseById = await prisma.expenses.findUnique({
       where: { id },
+    });
+    res.json({ date: expenseById });
+  } catch (error) {
+    console.log(error);
+
+    res.json({ error: `Could not find the expense with ${id}` });
+  }
+};
+
+// update an Expense by Id
+export const UpdateExpenseById = async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  const data = req.body;
+
+  try {
+    const expenseById = await prisma.expenses.findUnique({
+      where: { id },
+      select: {
+        assignTo: data,
+      },
     });
     res.json({ date: expenseById });
   } catch (error) {

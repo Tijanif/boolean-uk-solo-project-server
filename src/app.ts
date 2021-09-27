@@ -34,9 +34,9 @@ app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.urlencoded({ extended: true }));
 
 /* SETUP ROUTES */
-app.use(authRouter);
+// app.use(authRouter);
 
-app.use(loginAuth);
+// app.use(loginAuth);
 
 app.use('/user', userRouter);
 app.use('/person', personRouter);

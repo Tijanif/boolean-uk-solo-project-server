@@ -27,27 +27,26 @@ model User {
 }
 
 // Self and partner
-model Person {
-  id Int @id @default(autoincrement())
-  name String
-  income Income?
-  expenses Expenses[]
-}
+// model Person {
+//   id Int @id @default(autoincrement())
+//   name String
+//   income Income?
+//   expenses Expenses[]
+// }
 
 model Income {
   id Int @id @default(autoincrement())
  amount Int
- person Person @relation(fields: [personId], references:[id])
- personId Int
+//  person Person @relation(fields: [personId], references:[id])
+//  personId Int
 }
 
 
 model Expenses {
   id Int @id @default(autoincrement())
-  name String
-  amount Float
-  person Person @relation(fields: [personId], references:[id])
-  personId Int
+  description String
+  cost Float
+ assignTo String
 }
 
 model Division {
